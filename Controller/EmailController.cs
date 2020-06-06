@@ -1,23 +1,23 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using SendgridEmaiWebAPI.Services;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using SendgridEmaiWebAPI.Model;
-using System;
 using SendGrid;
+using SendgridEmaiWebAPI.Model;
+using SendgridEmaiWebAPI.Services;
+using System;
+using System.Collections.Generic;
 using System.Net;
+using System.Threading.Tasks;
 
 namespace SendgridEmaiWebAPI
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class EmailController: Controller
+    public class EmailController : Controller
     {
         private readonly IEmailSender _emailSender;
         private ILogger<EmailController> _logger;
 
-        public EmailController (ILogger<EmailController> logger, IEmailSender emailSender)
+        public EmailController(ILogger<EmailController> logger, IEmailSender emailSender)
         {
             _emailSender = emailSender;
             _logger = logger;
@@ -32,8 +32,8 @@ namespace SendgridEmaiWebAPI
             {
                 if (ModelState.IsValid)
                 {
-                    _logger.LogInformation("about to send an email");
-                    
+                    _logger.LogInformation("about to send an email to {0}", m.To);
+
                     var tos = new List<string>();
                     tos.Add(m.To);
 
@@ -41,7 +41,7 @@ namespace SendgridEmaiWebAPI
                     ccs.Add(m.Cc);
 
                     Response result = await _emailSender.SendEmailAsync(tos, ccs, m.Subject, m.Message);
-                    if(result.StatusCode == HttpStatusCode.Accepted)
+                    if (result.StatusCode == HttpStatusCode.Accepted)
                     {
                         return StatusCode(200);
                     }

@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.Options;
-using SendGrid;
+﻿using SendGrid;
 using SendGrid.Helpers.Mail;
 using System;
 using System.Collections.Generic;
@@ -7,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SendgridEmaiWebAPI.Services
 {
-    public class EmailSender: IEmailSender
+    public class EmailSender : IEmailSender
     {
 
         public Task<Response> SendEmailAsync(List<string> to, List<string> cc, string subject, string message)
@@ -21,7 +20,7 @@ namespace SendgridEmaiWebAPI.Services
             var client = new SendGridClient(apiKey);
             var msg = new SendGridMessage()
             {
-                From = new EmailAddress("cabirideservices@gmail.com", "Benignus Okorie"),
+                From = new EmailAddress("sijuadebabs@gmail.com", "Benignus Okorie"),
                 Subject = subject,
                 PlainTextContent = message,
                 HtmlContent = message
