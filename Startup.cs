@@ -1,11 +1,11 @@
-using System;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using SendgridEmaiWebAPI.Services;
 using Microsoft.OpenApi.Models;
+using SendgridEmaiWebAPI.Services;
 using Serilog;
+using System;
 
 namespace SendgridEmaiWebAPI
 {
